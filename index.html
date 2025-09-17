@@ -2,12 +2,12 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Bem-vindo ao VetSite</title>
+    <title>Bem-vindo ao PetHope</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>VetSite</h1>
+        <h1>PetHope</h1>
         <nav>
             <a href="index.html">Início</a>
             <a href="adocao.html">Adoção</a>
@@ -17,14 +17,81 @@
 
     <main>
         <section class="hero">
-            <h2>Bem-vindo ao nosso site de cuidados animais</h2>
+            <h2>Cuidando de quem te dá amor incondicional</h2>
             <p>Adote, cuide e ajude animais necessitados!</p>
             <a class="btn" href="adocao.html">Conheça a Adoção</a>
+        </section>
+
+        <section class="info">
+            <h2>Por que ajudar?</h2>
+            <p>Ao adotar um animal, você dá uma nova chance de vida e espalha amor. 
+            Doando sangue para animais, você ajuda a salvar vidas em situações de emergência.</p>
+        </section>
+
+        <section class="carousel">
+            <div class="carousel-container">
+                <div class="carousel-slide active">
+                    <img src="imagens/cao1.jpg" alt="Cão 1">
+                    <p>Leve alegria para sua vida adotando!</p>
+                </div>
+                <div class="carousel-slide">
+                    <img src="imagens/gato1.jpg" alt="Gato 1">
+                    <p>Seu amigo peludo te espera!</p>
+                </div>
+                <div class="carousel-slide">
+                    <img src="imagens/cao2.jpg" alt="Cão 2">
+                    <p>Doe sangue e salve vidas!</p>
+                </div>
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </section>
+
+        <section class="cards-container">
+            <div class="card">
+                <img src="imagens/cao3.jpg" alt="Cão 3">
+                <h3>Rex</h3>
+                <p>Adote Rex e ganhe um amigo para toda vida!</p>
+            </div>
+            <div class="card">
+                <img src="imagens/gato2.jpg" alt="Gato 2">
+                <h3>Mia</h3>
+                <p>Mia precisa de amor! Adote e transforme uma vida.</p>
+            </div>
+            <div class="card">
+                <img src="imagens/cao4.jpg" alt="Cão 4">
+                <h3>Buddy</h3>
+                <p>Ajude Buddy doando sangue e salvando vidas!</p>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 VetSite</p>
+        <p>&copy; 2025 PetHope</p>
     </footer>
+
+    <script>
+        const slides = document.querySelectorAll('.carousel-slide');
+        const prev = document.querySelector('.prev');
+        const next = document.querySelector('.next');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        prev.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        });
+
+        next.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        });
+    </script>
 </body>
 </html>
+

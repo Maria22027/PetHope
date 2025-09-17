@@ -2,10 +2,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f0f8ff; /* azul clarinho */
+    color: #333;
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: #1e90ff; /* azul principal */
     color: white;
     padding: 15px;
     text-align: center;
@@ -13,16 +15,39 @@ header {
 
 nav a {
     color: white;
-    margin: 0 10px;
+    margin: 0 15px;
     text-decoration: none;
     font-weight: bold;
+}
+
+nav a:hover {
+    color: #ffa500; /* laranja */
 }
 
 main {
     padding: 20px;
 }
 
-section {
+section.hero {
+    text-align: center;
+    background-color: #87cefa; /* azul claro */
+    padding: 50px 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+section.hero .btn {
+    background-color: #ffa500; /* laranja */
+    color: white;
+    margin-top: 15px;
+}
+
+section.hero .btn:hover {
+    background-color: #ff8c00; /* laranja escuro */
+}
+
+.info {
+    text-align: center;
     margin-bottom: 30px;
 }
 
@@ -30,14 +55,17 @@ section {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
 }
 
 .card {
     border: 1px solid #ddd;
     padding: 10px;
-    width: 200px;
+    width: 250px;
     text-align: center;
     border-radius: 10px;
+    background-color: #fff8dc; /* tom laranja clarinho */
 }
 
 .card img {
@@ -50,20 +78,69 @@ section {
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
 }
 
-.btn:hover {
-    background-color: #45a049;
-}
-
 footer {
     text-align: center;
+    padding: 15px;
+    background-color: #1e90ff;
+    color: white;
+}
+
+/* Carrossel */
+.carousel {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.carousel-slide {
+    display: none;
+    text-align: center;
     padding: 10px;
-    background-color: #eee;
+}
+
+.carousel-slide.active {
+    display: block;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.carousel button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(30,144,255,0.7);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.carousel .prev {
+    left: 10px;
+}
+
+.carousel .next {
+    right: 10px;
+}
+
+.carousel button:hover {
+    background-color: #ffa500;
 }
