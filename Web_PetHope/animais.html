@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <title>Animais para Adoção</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animais.css">
 </head>
 <body onload="carregarAnimais()">
   <header>
-    <h1>Animais para Adoção</h1>
+    <h1>PetHope</h1>
     <nav>
       <a href="index.html">Início</a>
       <a href="adocao.html">Adoção</a>
@@ -15,15 +16,18 @@
     </nav>
   </header>
 
+  <h2>Animais para adoção</h2>
+
   <main class="cards-container" id="lista-animais">
-    <!-- Cards preenchidos via JS -->
+    <!-- Os cards serão inseridos pelo JS -->
   </main>
 
   <footer>
-    <p>&copy; 2025 VetSite</p>
+    <p>&copy; 2025 PetHope</p>
   </footer>
-
+<body onload="carregarAnimais()">
+  <div id="lista-animais"></div>
   <script src="animais.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>
+
