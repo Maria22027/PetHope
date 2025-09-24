@@ -72,7 +72,7 @@ ul li {
 /* Botão */
 .btn {
     display: inline-block;
-    background-color: #33aec4;
+    background-color: #ff493c;
     color: white;
     padding: 12px 25px;
     border-radius: 8px;
@@ -84,13 +84,13 @@ ul li {
 }
 
 .btn:hover {
-    background-color: #ff493c;
+    background-color: #33aec4;
 }
 
 /* Rodapé */
 footer {
     text-align: center;
     padding: 1px;
-    background-color: #33aec4;
+    background-color: #ff493c;
     color: white;
 }

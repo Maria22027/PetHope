@@ -1,6 +1,6 @@
 /* Cabeçalho */
 header {
-    background-color: #33aec4; /* cor sólida */
+    background-color: #ff493c; /* cor sólida */
     color: white;
     padding: 10px 20px;
     display: flex;              /* coloca o logo e os links na mesma linha */
@@ -24,7 +24,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #ff493c; /* muda pra vermelho ao passar o mouse */
+    color: #c52a1f; /* muda pra vermelho ao passar o mouse */
 }
 
 
@@ -71,13 +71,13 @@ ul li, ol li {
 }
 
 .btn:hover {
-    background-color: #33aec4;
+    background-color: #ff493c;
 }
 
 /* Rodapé */
 footer {
     text-align: center;
     padding: 1px;
-    background-color: #33aec4;
+    background-color: #ff493c;
     color: white;
 }

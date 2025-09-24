@@ -36,7 +36,7 @@
   margin: 10px 0 5px;
   font-size: 20px;
   font-weight: bold;
-  color: #333;
+  color: #202020;
 
   /* deixa todos os nomes na mesma altura */
   min-height: 28px;
@@ -57,7 +57,7 @@
 .card button {
   margin-top: 10px;
   padding: 10px 14px;
-  background-color: #1abc9c;
+  background-color: #33aec4;
   color: white;
   font-weight: bold;
   border: none;
@@ -67,7 +67,7 @@
 }
 
 .card button:hover {
-  background-color: #16a085;
+  background-color: #ff493c;
 }
 
 h2 {
