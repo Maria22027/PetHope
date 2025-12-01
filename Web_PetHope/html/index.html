@@ -2,19 +2,23 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bem-vindo ao PetHope</title>
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/download.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <h1>PetHope</h1>
-        <nav>
-            <a href="index.html">Início</a>
-            <a href="animais.html">Animais</a>
-            <a href="doacao-sangue.html">Doação de Sangue</a>
-            <a id="perfil-link" style="display:none; cursor:pointer;" onclick="irParaPerfil()">Perfil</a>
-            <a id="userLogout" style="display:none; cursor:pointer;" onclick="handleUserMenu(event)">Logout</a>
-            <a id="loginLink" href="pages/login.html">Login</a>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: inherit;">PetHope</a>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="doacao-sangue.html" class="nav-link">Doação de Sangue</a>
+            <a href="animais.html" class="nav-link">Animais</a>
+            <a href="campanhas.html" class="nav-link">Campanhas</a>
+            <a href="download.html" class="nav-link">Download</a>
         </nav>
     </header>
 
@@ -38,124 +42,43 @@
             <button class="next">&#10095;</button>
         </section>
 
-        <!-- Cards de animais -->
-        <section class="cards-container">
-            <div class="card">
-                <img src="img/cao3.jpg" alt="Cão 3">
-                <h3>Nina</h3>
-                <p>Adote e ganhe uma amigo para toda vida!</p>
-                <a class="btn" href="detalhes-cao3.html">Saiba Mais</a>
-            </div>
-            <div class="card">
-                <img src="img/gato2.jpg" alt="Gato 2">
-                <h3>Luna</h3>
-                <p>Mia precisa de amor! Adote e transforme uma vida.</p>
-                <a class="btn" href="detalhes-gato2.html">Saiba Mais</a>
-            </div>
-            <div class="card">
-                <img src="img/buddy.jpg" alt="Cão 4">
-                <h3>Buddy</h3>
-                <p>Ajude Buddy doando sangue e salvando vidas!</p>
-                <a class="btn" href="doacao-sangue.html">Saiba Mais</a>
+        <!-- Seção CTA para animais -->
+        <section style="text-align: center; padding: 40px 20px; background-color: #fff4f4; border-radius: 10px; margin: 20px;">
+            <h3 style="color: #ff493c; margin-bottom: 15px;">🐾 Conheça nossos Animais</h3>
+            <p style="color: #666; margin-bottom: 20px;">Veja os pets disponíveis para adoção e faça a diferença na vida de um animal!</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a class="btn" href="animais.html" style="background-color: #ff493c; color: white;">Ver Animais para Adoção</a>
+                <a class="btn" href="doacao-sangue.html" style="background-color: #33aec4; color: white;">Doação de Sangue</a>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 PetHope</p>
+    <footer class="footer">
+        <div class="footer-block download-footer">
+            <h3>Faça download do nosso <strong>aplicativo</strong></h3>
+            <div class="download-buttons">
+                <i class="fab fa-android" onclick="window.location.href='download.html'"></i>
+                <i class="fab fa-windows" onclick="window.location.href='download.html'"></i>
+            </div>
+        </div>
+        <div class="footer-block contact-footer">
+            <h3>Fale conosco</h3>
+            <p>pethope@email.com</p>
+            <p>0800 000 0000</p>
+        </div>
+        <div class="footer-block social-footer">
+            <h3>Nossas redes</h3>
+            <p><i class="fab fa-instagram"></i> @PetHope</p>
+            <p><i class="fab fa-facebook"></i> PetHope</p>
+            <p><i class="fab fa-twitter-square"></i> @PetHope</p>
+        </div>
     </footer>
 
-    <script src="../js/api.js"></script>
-    <script src="../js/auth.js"></script>
+    <script src="../js/campanhas.js"></script>
     <script>
-        // Gerenciar exibição de login/perfil
-        function updateUserUI() {
-            const perfilLink = document.getElementById('perfil-link');
-            const userLogout = document.getElementById('userLogout');
-            const loginLink = document.getElementById('loginLink');
-            
-            if (auth.isAuthenticated()) {
-                const user = auth.getUser();
-                perfilLink.style.display = 'inline';
-                perfilLink.textContent = `👤 ${user.nome}`;
-                userLogout.style.display = 'inline';
-                loginLink.style.display = 'none';
-            } else {
-                perfilLink.style.display = 'none';
-                userLogout.style.display = 'none';
-                loginLink.style.display = 'inline';
-            }
-        }
-
-        function irParaPerfil() {
-            window.location.href = 'pages/historico.html';
-        }
-
-        function handleUserMenu(event) {
-            const confirmed = confirm('Deseja fazer logout?');
-            if (confirmed) {
-                auth.logout();
-                window.location.href = 'index.html';
-            }
-        }
-
-        // Atualizar UI ao carregar a página
+        // Carregar campanhas ao abrir a página
         document.addEventListener('DOMContentLoaded', () => {
-            updateUserUI();
-        });
-
-        // Carregar campanhas da API
-        async function carregarCampanhas() {
-            try {
-                const campanhas = await api.listarCampanhas();
-                const container = document.getElementById('campanhassCarrossel');
-                
-                if (campanhas.length === 0) {
-                    container.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Nenhuma campanha disponível</p>';
-                    return;
-                }
-
-                container.innerHTML = campanhas.map((campanha, index) => `
-                    <div class="carousel-slide ${index === 0 ? 'active' : ''}">
-                        <h3>${campanha.titulo}</h3>
-                        <p>${campanha.descricao}</p>
-                    </div>
-                `).join('');
-
-                setupCarousel();
-            } catch (error) {
-                console.error('Erro ao carregar campanhas:', error);
-            }
-        }
-
-        // Setup do carrossel
-        function setupCarousel() {
-            const slides = document.querySelectorAll('.carousel-slide');
-            const prev = document.querySelector('.prev');
-            const next = document.querySelector('.next');
-            let currentSlide = 0;
-
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-            }
-
-            prev.addEventListener('click', () => {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                showSlide(currentSlide);
-            });
-
-            next.addEventListener('click', () => {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            });
-        }
-
-        // Carregar dados ao abrir página
-        document.addEventListener('DOMContentLoaded', () => {
-            updateUserUI();
-            carregarCampanhas();
+            renderizarCarrosselCampanhas('campanhassCarrossel', 5);
         });
     </script>
 </body>

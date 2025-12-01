@@ -1,24 +1,55 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+    // Cabeçalho com patinhas e bem-vindo
+    header: {
+        backgroundColor: "#E53935",
+        height: 150,
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        justifyContent: "center",
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 8,
+        marginBottom: 20,
+    },
+    pawsContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    pawLeft: {
+        marginRight: 15,
+        opacity: 0.9,
+    },
+    pawRight: {
+        marginLeft: 15,
+        opacity: 0.9,
+    },
+    welcomeText: {
+        fontSize: 32,
+        fontWeight: "bold",
+        color: "#ffffff",
+        textAlign: "center",
+    },
+
     container: {
         flex: 1,
         paddingHorizontal: 24,
-        // Padding para empurrar o conteúdo abaixo da área de status bar
-        paddingTop: 60,
-        // O background é controlado pelo ScrollView, mantenha este transparente
+        paddingTop: 20,
         backgroundColor: "transparent",
     },
 
-    // Removidos: header e backButton styles
-
     title: {
-        // Ajustado para ser como na imagem: menor e no topo
         fontSize: 28,
-        fontWeight: "500",
-        marginBottom: 40, // Espaço entre o título e o primeiro input
+        fontWeight: "600",
+        marginBottom: 40,
         marginLeft: 0,
-        color: "#000000",
+        color: "#E53935",
+        textAlign: "center",
     },
 
     // Estilo do container para o input de senha e o botão "Mostrar Senha"

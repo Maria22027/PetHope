@@ -1,60 +1,58 @@
-// Função para gerenciar exibição de login/usuário
-function updateUserUI() {
-    const perfilLink = document.getElementById('perfil-link');
-    const userLogout = document.getElementById('userLogout');
-    const loginLink = document.getElementById('loginLink');
-    
-    if (auth.isAuthenticated()) {
-        const user = auth.getUser();
-        perfilLink.style.display = 'inline';
-        perfilLink.textContent = `👤 ${user.nome}`;
-        userLogout.style.display = 'inline';
-        loginLink.style.display = 'none';
-    } else {
-        perfilLink.style.display = 'none';
-        userLogout.style.display = 'none';
-        loginLink.style.display = 'inline';
-    }
-}
+const API_BASE_URL = 'http://localhost:3000';
 
-function handleUserMenu(event) {
-    const confirmed = confirm('Deseja fazer logout?');
-    if (confirmed) {
-        auth.logout();
-        window.location.href = 'index.html';
-    }
-}
-
-// Função para carregar os animais da API
-async function carregarAnimais() {
+// Função para carregar os animais da API com limite
+async function carregarAnimais(limite = 6) {
     const container = document.getElementById("lista-animais");
     if (!container) return;
 
     try {
-        const pets = await api.listarPets();
+        const response = await fetch(`${API_BASE_URL}/pets`);
+        if (!response.ok) {
+            throw new Error('Erro ao buscar pets');
+        }
+        const pets = await response.json();
         
         if (pets.length === 0) {
             container.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Nenhum animal disponível</p>';
             return;
         }
 
-        container.innerHTML = pets.map(pet => `
+        // Limitar número de pets exibidos
+        const petsLimitados = pets.slice(0, limite);
+        const temMaisPets = pets.length > limite;
+
+        container.innerHTML = petsLimitados.map(pet => `
             <div class="card">
-                <img src="../img/placeholder.jpg" alt="${pet.nome}">
+                ${pet.imageUrl ? `<img src="${pet.imageUrl}" alt="${pet.nome}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="width: 100%; height: 150px; background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%); border-radius: 10px; display: none; align-items: center; justify-content: center;"><i class="fas fa-paw" style="font-size: 50px; color: white;"></i></div>` : `<div style="width: 100%; height: 150px; background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-paw" style="font-size: 50px; color: white;"></i></div>`}
                 <h3>${pet.nome}</h3>
                 <p>Tipo: ${pet.especie}</p>
                 <p>Idade: ${pet.idade || 'Desconhecida'}</p>
-                <a class="btn" href="pages/detalhes.html?id=${pet._id}">Saiba Mais</a>
+                <button class="btn" onclick="redirecionarParaDownload()">Solicitar Adoção</button>
             </div>
         `).join('');
+
+        // Adicionar botão "Ver Mais" se houver mais pets
+        if (temMaisPets) {
+            container.innerHTML += `
+                <div class="ver-mais-card" style="grid-column: 1/-1; text-align: center; padding: 30px;">
+                    <p style="font-size: 18px; margin-bottom: 15px;">Quer ver mais animais disponíveis?</p>
+                    <p style="color: #666; margin-bottom: 20px;">Baixe nosso aplicativo para acessar todos os pets e solicitar adoção!</p>
+                    <button class="btn" onclick="redirecionarParaDownload()" style="font-size: 16px; padding: 12px 30px;">Baixar Aplicativo</button>
+                </div>
+            `;
+        }
     } catch (error) {
         console.error('Erro ao carregar animais:', error);
         container.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Erro ao carregar animais</p>';
     }
 }
 
+function redirecionarParaDownload() {
+    window.location.href = 'download.html';
+}
+
 // Carregar dados ao abrir página
 document.addEventListener('DOMContentLoaded', () => {
-    updateUserUI();
-    carregarAnimais();
+    carregarAnimais(6); // Limitar a 6 pets
 });

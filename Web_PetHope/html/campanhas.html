@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adoção de Animais</title>
-    <link rel="stylesheet" href="../styles/adocao.css">
+    <title>Campanhas - PetHope</title>
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/campanhas.css">
     <link rel="stylesheet" href="../styles/download.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -24,29 +24,22 @@
     </header>
 
     <main>
-        <section>
-            <h2>Como funciona a adoção</h2>
-            <p>A adoção é um processo cuidadoso para garantir que o animal encontre um lar amoroso.</p>
-            <ul>
-                <li>Escolha o animal que você deseja adotar.</li>
-                <li>Preencha o formulário de adoção.</li>
-                <li>O responsável analisará sua solicitação.</li>
-                <li>Se aprovado, você poderá levar seu novo amigo para casa!</li>
-            </ul>
-            <p>Temos cães, gatos, porquinhos-da-índia e muito mais!</p>
+        <section class="hero">
+            <h2>Campanhas de Doação e Adoção</h2>
+            <p>Conheça as campanhas ativas e ajude a fazer a diferença!</p>
         </section>
 
-        <section>
-            <h2>Dicas para adoção responsável</h2>
-            <p>Antes de adotar, considere:</p>
-            <ul>
-                <li>Tempo disponível para cuidar do animal</li>
-                <li>Espaço adequado em casa</li>
-                <li>Custos com alimentação e veterinário</li>
-            </ul>
+        <section class="campanhas-info">
+            <p>Para participar, cadastrar seu pet como doador ou solicitar adoção, baixe nosso aplicativo.</p>
+            <a class="btn" href="download.html">Baixar Aplicativo</a>
         </section>
 
-        <button onclick="window.location.href='animais.html'" class="btn">Ver Animais Disponíveis</button>
+        <section class="campanhas-lista" id="campanhasLista">
+            <!-- Campanhas serão carregadas aqui via JavaScript -->
+            <div class="loading">
+                <p>Carregando campanhas...</p>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -70,6 +63,12 @@
         </div>
     </footer>
 
-
+    <script src="../js/campanhas.js"></script>
+    <script>
+        // Carregar campanhas ao abrir a página
+        document.addEventListener('DOMContentLoaded', () => {
+            renderizarListaCampanhas('campanhasLista');
+        });
+    </script>
 </body>
 </html>

@@ -52,7 +52,7 @@ export async function apiFetch(path, options = {}) {
     headers,
   };
 
-  console.log('API Request:', { url, method: fetchOptions.method || 'GET' });
+  console.log('🔵 API Request:', { url, method: fetchOptions.method || 'GET', hasToken: !!token });
 
   try {
     const res = await fetch(url, fetchOptions);
@@ -61,20 +61,27 @@ export async function apiFetch(path, options = {}) {
     try {
       data = text ? JSON.parse(text) : null;
     } catch (e) {
+      console.warn('⚠️ Response não é JSON:', text);
       data = text;
     }
     
-    console.log('API Response:', { status: res.status, data });
+    console.log('✅ API Response:', { 
+      status: res.status, 
+      url,
+      dataType: Array.isArray(data) ? 'array' : typeof data,
+      dataLength: Array.isArray(data) ? data.length : null
+    });
     
     if (!res.ok) {
       const error = new Error(data?.error || `HTTP ${res.status}`);
       error.status = res.status;
       error.data = data;
+      console.error('❌ API Error Response:', { status: res.status, error: data });
       throw error;
     }
     return data;
   } catch (err) {
-    console.error('API Error:', { message: err.message, url });
+    console.error('❌ API Error:', { message: err.message, url, status: err.status });
     throw err;
   }
 }

@@ -12,8 +12,9 @@ import {
     View,
 } from "react-native";
 
+import { FontAwesome5 } from '@expo/vector-icons';
 import { styles } from "../../assets/styles/SignIn.styles";
-import { loginRequest, saveToken } from "../utils/api";
+import { apiFetch, loginRequest, saveToken } from "../utils/api";
 
 const SignIn = () => {
   const router = useRouter();
@@ -34,8 +35,24 @@ const SignIn = () => {
       const data = await loginRequest(email, password);
       if (data?.token) {
         await saveToken(data.token);
-        // Redireciona para a raiz, que vai checar o token e ir para /(tabs)
-        router.replace("/");
+        
+        // Verificar o tipo de usuário
+        try {
+          const userData = await apiFetch('/users/me');
+          
+          // Se for clínica ou ONG, redirecionar para tela de aviso
+          if (userData?.tipo === 'clinica' || userData?.tipo === 'ong') {
+            router.replace("/Screens/desktopRedirectScreen");
+            return;
+          }
+          
+          // Se for tutor, ir para home
+          router.replace("/");
+        } catch (error) {
+          console.error('Erro ao buscar dados do usuário:', error);
+          // Em caso de erro, permitir acesso (fallback)
+          router.replace("/");
+        }
       } else {
         Alert.alert('Erro de Login', 'Resposta inválida do servidor.');
         console.error('Login response', data);
@@ -56,15 +73,22 @@ const SignIn = () => {
       contentContainerStyle={{ flexGrow: 1 }}
       keyboardShouldPersistTaps="handled"
     >
+      {/* Cabeçalho com patinhas e bem-vindo */}
+      <View style={styles.header}>
+        <View style={styles.pawsContainer}>
+          <FontAwesome5 name="paw" size={30} color="#fff" style={styles.pawLeft} />
+          <Text style={styles.welcomeText}>Bem-vindo!</Text>
+          <FontAwesome5 name="paw" size={30} color="#fff" style={styles.pawRight} />
+        </View>
+      </View>
 
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
-
         style={styles.container}
       >
 
-        {/* Título "Login" no topo */}
-        <Text style={styles.title}>Login</Text>
+        {/* Título "Login" */}
+        <Text style={styles.title}>PetHope</Text>
 
         {/* Input Email (Agora o estilo azul é aplicado diretamente no TextInput) */}
         <TextInput

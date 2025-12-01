@@ -14,7 +14,7 @@ import {
 
 import { Ionicons } from '@expo/vector-icons';
 import { styles } from "../../assets/styles/ClinicaSignUp.styles";
-import { apiFetch, saveToken } from "../utils/api";
+import { apiFetch } from "../utils/api";
 
 const ClinicaSignUp = () => {
   const router = useRouter();
@@ -60,23 +60,41 @@ const ClinicaSignUp = () => {
         })
       });
 
-      if (response && response._id) {
-        Alert.alert("Sucesso", "Clínica cadastrada com sucesso!");
-        // Fazer login automático
-        const loginResponse = await apiFetch('/users/login', {
-          method: 'POST',
-          body: JSON.stringify({ email, senha: password })
-        });
+      console.log('📝 Resposta do cadastro:', response);
+
+      if (response && (response._id || response.id || response.token)) {
+        Alert.alert(
+          "Sucesso!", 
+          "Clínica cadastrada com sucesso! Faça login para continuar.",
+          [
+            {
+              text: "OK",
+              onPress: () => router.replace("/(auth)/signIn")
+            }
+          ],
+          { cancelable: false }
+        );
         
-        if (loginResponse?.token) {
-          await saveToken(loginResponse.token);
-          router.replace("/");
-        }
+        // Garantir redirecionamento mesmo se o Alert não funcionar (ex: na web)
+        setTimeout(() => {
+          router.replace("/(auth)/signIn");
+        }, 100);
+      } else {
+        throw new Error("Resposta inesperada do servidor");
       }
     } catch (error) {
-      const message = error?.data?.error || error.message || "Erro ao cadastrar";
-      Alert.alert("Erro", message);
-      console.error('SignUp error', error);
+      console.error('SignUp error:', error);
+      
+      let errorMessage = "Erro ao cadastrar. Tente novamente.";
+      if (error?.data?.error) {
+        errorMessage = error.data.error;
+      } else if (error?.message?.includes("Email já cadastrado")) {
+        errorMessage = "Este email já está cadastrado. Faça login ou use outro email.";
+      } else if (error?.message) {
+        errorMessage = error.message;
+      }
+      
+      Alert.alert("Erro no Cadastro", errorMessage);
     } finally {
       setLoading(false);
     }

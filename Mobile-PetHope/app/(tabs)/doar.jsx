@@ -1,8 +1,44 @@
 import { Ionicons } from "@expo/vector-icons";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Linking, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "../../assets/styles/DoarScreen.styles";
+import { apiFetch } from "../utils/api";
 
 export default function DoarScreen() {
+    const [donorCount, setDonorCount] = useState(0);
+
+    useEffect(() => {
+        loadDonorCount();
+    }, []);
+
+    const loadDonorCount = async () => {
+        try {
+            const pets = await apiFetch('/pets');
+            // Filtra pets com status de doação de sangue
+            // Status possíveis: "adocao", "doacao-sangue", "adocao-doacao-sangue", "indisponivel"
+            const donors = pets.filter(pet => 
+                pet.status && (
+                    pet.status === 'doacao-sangue' || 
+                    pet.status === 'adocao-doacao-sangue'
+                )
+            );
+            setDonorCount(donors.length);
+        } catch (error) {
+            console.error("Erro ao carregar contador de doadores:", error);
+        }
+    };
+
+    const handleRegisterPet = () => {
+        // Redireciona para WhatsApp (substitua pelo número desejado)
+        const phoneNumber = '5511999999999'; // Ajuste o número
+        const message = 'Olá! Gostaria de cadastrar meu pet para doação de sangue';
+        const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        
+        Linking.openURL(url).catch(err => {
+            console.error("Erro ao abrir WhatsApp:", err);
+        });
+    };
+
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.title}>Informações sobre <Text style={styles.bold}>doação de sangue</Text></Text>
@@ -62,13 +98,25 @@ export default function DoarScreen() {
             {/* Como participar */}
             <Text style={styles.sectionTitle}>Como participar?</Text>
             <Text style={styles.text}>
-                Seu pet cumpre os requisitos? Envie cadastro clicando em um dos botões abaixo.
+                Seu pet cumpre os requisitos? Cadastre clicando no botão abaixo.
             </Text>
 
-            {/* Botões */}
-            <TouchableOpacity style={styles.redBtn}>
-                <Ionicons name="search" size={20} color="#fff" />
-                <Text style={styles.btnText}>Buscar animal doador</Text>
+            {/* Contador de Animais Doadores */}
+            <View style={styles.counterContainer}>
+                <Ionicons name="heart" size={40} color="#E53935" />
+                <View style={styles.counterTextContainer}>
+                    <Text style={styles.counterNumber}>{donorCount}</Text>
+                    <Text style={styles.counterLabel}>
+                        {donorCount === 1 ? 'Animal cadastrado' : 'Animais cadastrados'}
+                    </Text>
+                    <Text style={styles.counterSubLabel}>para doação de sangue</Text>
+                </View>
+            </View>
+
+            {/* Botão Cadastrar Meu Pet */}
+            <TouchableOpacity style={styles.redBtn} onPress={handleRegisterPet}>
+                <Ionicons name="add-circle" size={20} color="#fff" />
+                <Text style={styles.btnText}>Cadastrar Meu Pet</Text>
             </TouchableOpacity>
 
             <View style={{ height: 40 }} />

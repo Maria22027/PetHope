@@ -1,50 +1,256 @@
-/* Cabeçalho */
-header {
-    background-color: #ff493c; /* cor sólida */
-    color: white;
-    padding: 10px 20px;
-    display: flex;              /* coloca o logo e os links na mesma linha */
-    align-items: center;        /* centraliza verticalmente */
-    justify-content: space-between; /* título à esquerda, menu à direita */
-}
-
-/* Logo / título */
-header h1 {
-    font-size: 1.5rem;
-    margin: 0;
-}
-
-/* Menu */
-nav a {
-    color: white;
-    margin-left: 20px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: #c52a1f; /* muda pra vermelho ao passar o mouse */
-}
+/* Cabeçalho e Nav agora vêm do download.css */
 
 /* Seções */
 section {
     padding: 40px 20px;
-    max-width: 900px;
+    max-width: 1100px;
     margin: auto;
 }
 
 section h2 {
-    color: #33aec4;
-    margin-bottom: 15px;
-    border-left: 5px solid #ff493c;
-    padding-left: 10px;
+    color: #ff493c;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    text-align: center;
 }
 
-.intro p,
-.frequency p,
-.contact p {
+/* Hero Doação */
+.hero-doacao {
+    text-align: center;
+    background: linear-gradient(135deg, #ff6b6b20 0%, #feca5720 100%);
+    border-radius: 15px;
+    padding: 50px 30px;
+}
+
+.hero-doacao .destaque {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #ff493c;
+    margin-bottom: 15px;
+}
+
+.hero-doacao p {
     font-size: 1.1rem;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto 10px;
+}
+
+/* Cards de Informação */
+.info-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.info-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+    flex: 0 1 calc(33.333% - 20px);
+    min-width: 250px;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+}
+
+.info-card h3 {
+    color: #ff493c;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.info-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Requisitos */
+.requisitos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.requisitos-grupo {
+    background: #f9f9f9;
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 5px solid #ff493c;
+}
+
+.requisitos-grupo h3 {
+    color: #33aec4;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.requisitos-grupo ul {
+    list-style: none;
+    padding: 0;
+}
+
+.requisitos-grupo ul li {
+    padding: 10px 0;
+    color: #555;
+    font-size: 1.05rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.requisitos-grupo ul li:last-child {
+    border-bottom: none;
+}
+
+.importante-box {
+    background: #fff4e6;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #ffa500;
+    margin-top: 30px;
+}
+
+.importante-box h4 {
+    color: #ff8c00;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.importante-box p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Passos */
+.passos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.passo {
+    text-align: center;
+    padding: 20px;
+    flex: 0 1 calc(25% - 20px);
+    min-width: 200px;
+}
+
+.passo-numero {
+    width: 60px;
+    height: 60px;
+    background: #ff493c;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0 auto 15px;
+}
+
+.passo h3 {
+    color: #33aec4;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.passo p {
+    color: #666;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* Benefícios */
+.lista-beneficios {
+    list-style: none;
+    padding: 0;
+    max-width: 700px;
+    margin: 30px auto;
+}
+
+.lista-beneficios li {
+    background: white;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+    color: #555;
+    transition: transform 0.3s ease;
+}
+
+.lista-beneficios li:hover {
+    transform: translateX(10px);
+}
+
+/* CTA Doação */
+.cta-doacao {
+    text-align: center;
+    background: linear-gradient(135deg, #ff493c 0%, #33aec4 100%);
+    color: white;
+    border-radius: 15px;
+    padding: 50px 30px;
+}
+
+.cta-doacao h2 {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.cta-doacao p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Botões */
+.btn {
+    display: inline-block;
+    padding: 15px 35px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: white;
+    color: #ff493c;
+}
+
+.btn-primary:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover {
+    background-color: white;
+    color: #ff493c;
+    transform: translateY(-3px);
 }
 
 /* Listas */
@@ -57,20 +263,23 @@ ul li, ol li {
     margin-bottom: 10px;
 }
 
-/* Botão */
-.btn {
-    display: inline-block;
-    background-color: #ff493c;
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background-color: #33aec4;
+/* Responsividade */
+@media (max-width: 768px) {
+    .info-cards,
+    .requisitos-container,
+    .passos {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 80%;
+        max-width: 300px;
+    }
 }
 
 /* Rodapé */

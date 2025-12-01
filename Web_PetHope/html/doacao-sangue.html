@@ -2,92 +2,166 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doação de Sangue</title>
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/doa.css">
+    <link rel="stylesheet" href="../styles/download.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <h1>PetHope</h1>
-        <nav>
-            <a href="index.html">Início</a>
-            <a href="animais.html">Animais</a>
-            <a href="adocao.html">Adoção</a>
-            <a id="perfil-link" style="display:none; cursor:pointer;" onclick="irParaPerfil()">Perfil</a>
-            <a id="userLogout" style="display:none; cursor:pointer;" onclick="handleUserMenu(event)">Logout</a>
-            <a id="loginLink" href="pages/login.html">Login</a>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: inherit;">PetHope</a>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="doacao-sangue.html" class="nav-link">Doação de Sangue</a>
+            <a href="animais.html" class="nav-link">Animais</a>
+            <a href="campanhas.html" class="nav-link">Campanhas</a>
+            <a href="download.html" class="nav-link">Download</a>
         </nav>
     </header>
 
     <main>
-        <section>
+        <section class="hero-doacao">
             <h2>Programa de Doação de Sangue para Animais</h2>
-            <p>Ajude a salvar vidas! Doe sangue para animais necessitados.</p>
-            <p>O seu animal saudável pode ajudar outros. Saiba como participar:</p>
+            <p class="destaque">Seu pet pode ser um herói! A doação de sangue animal salva vidas todos os dias.</p>
+            <p>Assim como os humanos, cães e gatos também podem precisar de transfusões de sangue em situações de emergência, cirurgias complexas ou doenças graves.</p>
         </section>
 
-        <section>
-            <h2>Requisitos para doação</h2>
-            <ul>
-                <li>Cão ou gato com peso mínimo</li>
-                <li>Animal saudável</li>
-                <li>Sem doenças transmissíveis</li>
-                <li>Vacinado em dia</li>
+        <section class="importancia">
+            <h2>Por que a doação de sangue é importante?</h2>
+            <div class="info-cards">
+                <div class="info-card">
+                    <h3>🩸 Salva Vidas</h3>
+                    <p>Uma única doação pode salvar até 4 vidas animais. Muitos pets sobrevivem a cirurgias e traumas graves graças às transfusões.</p>
+                </div>
+                <div class="info-card">
+                    <h3>⚕️ Emergências Veterinárias</h3>
+                    <p>Acidentes, envenenamentos, cirurgias de emergência e doenças como babesiose frequentemente requerem transfusões urgentes.</p>
+                </div>
+                <div class="info-card">
+                    <h3>💝 Seguro para o Doador</h3>
+                    <p>O procedimento é rápido (15-20 minutos), seguro e indolor. Seu pet recebe avaliação veterinária completa gratuita.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🔄 Banco de Sangue</h3>
+                    <p>Os bancos de sangue veterinário estão sempre com estoques baixos. Seu pet pode garantir que outros tenham uma segunda chance.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="requisitos">
+            <h2>Requisitos para Doação</h2>
+            
+            <div class="requisitos-container">
+                <div class="requisitos-grupo">
+                    <h3>Para Cães Doadores:</h3>
+                    <ul>
+                        <li>✓ Peso acima de 27kg</li>
+                        <li>✓ Idade entre 1 e 8 anos</li>
+                        <li>✓ Temperamento calmo e dócil</li>
+                        <li>✓ Saudável e com vacinação em dia</li>
+                        <li>✓ Livre de doenças transmissíveis pelo sangue</li>
+                        <li>✓ Não gestante ou lactante</li>
+                        <li>✓ Não ter recebido transfusão anteriormente</li>
+                    </ul>
+                </div>
+                
+                <div class="requisitos-grupo">
+                    <h3>Para Gatos Doadores:</h3>
+                    <ul>
+                        <li>✓ Peso acima de 4kg</li>
+                        <li>✓ Idade entre 1 e 8 anos</li>
+                        <li>✓ Temperamento tranquilo</li>
+                        <li>✓ Saudável e com vacinação em dia</li>
+                        <li>✓ FIV e FeLV negativos</li>
+                        <li>✓ Vive exclusivamente dentro de casa</li>
+                        <li>✓ Não ter recebido transfusão anteriormente</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="importante-box">
+                <h4>⚠️ Importante:</h4>
+                <p>Cães podem doar sangue a cada 2-3 meses, e gatos a cada 2 meses. O intervalo garante a saúde do doador e a reposição completa do sangue.</p>
+            </div>
+        </section>
+
+        <section class="como-funciona">
+            <h2>Como Funciona o Processo de Doação?</h2>
+            <div class="passos">
+                <div class="passo">
+                    <div class="passo-numero">1</div>
+                    <h3>Cadastro</h3>
+                    <p>Baixe nosso aplicativo e cadastre seu pet como doador, informando dados de saúde e histórico veterinário.</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-numero">2</div>
+                    <h3>Avaliação</h3>
+                    <p>Um veterinário realiza exames de sangue para verificar se seu pet está apto a doar (hemograma completo e testes de doenças).</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-numero">3</div>
+                    <h3>Agendamento</h3>
+                    <p>Quando houver necessidade, você será contatado para agendar a doação em clínica ou hospital veterinário parceiro.</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-numero">4</div>
+                    <h3>Coleta</h3>
+                    <p>O procedimento leva 15-20 minutos. Seu pet fica confortável e recebe carinho durante todo o processo.</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-numero">5</div>
+                    <h3>Pós-Doação</h3>
+                    <p>Seu pet recebe um lanche especial e pode ir para casa no mesmo dia. Você recebe certificado de doador-herói!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="beneficios">
+            <h2>Benefícios para o Seu Pet Doador</h2>
+            <ul class="lista-beneficios">
+                <li>🏥 Exames de sangue completos gratuitos</li>
+                <li>💉 Avaliação veterinária periódica sem custo</li>
+                <li>🎖️ Certificado de doador-herói</li>
+                <li>📋 Monitoramento contínuo da saúde</li>
+                <li>💝 Satisfação de salvar vidas</li>
+                <li>🎁 Brindes e mimos especiais para doadores frequentes</li>
             </ul>
         </section>
 
-        <section>
-            <h2>Como funciona?</h2>
-            <p>1. Cadastre-se em nossa plataforma</p>
-            <p>2. Preencha o formulário com dados do seu animal</p>
-            <p>3. Agende uma consulta</p>
-            <p>4. Realize a coleta de sangue com segurança</p>
-            <p>5. Receba certificado de participação</p>
+        <section class="cta-doacao">
+            <h2>Pronto para Fazer Seu Pet Ser um Herói?</h2>
+            <p>Cadastre seu pet como doador através do nosso aplicativo e ajude a salvar vidas!</p>
+            <div class="cta-buttons">
+                <button onclick="window.location.href='download.html'" class="btn btn-primary">Baixar Aplicativo</button>
+                <button onclick="window.location.href='campanhas.html'" class="btn btn-secondary">Ver Campanhas Ativas</button>
+            </div>
         </section>
-
-        <button onclick="window.location.href='animais.html'" class="btn">Ver Animais que Precisam de Doação</button>
     </main>
 
-    <footer>
-        <p>&copy; 2025 PetHope</p>
+    <footer class="footer">
+        <div class="footer-block download-footer">
+            <h3>Faça download do nosso <strong>aplicativo</strong></h3>
+            <div class="download-buttons">
+                <i class="fab fa-android" onclick="window.location.href='download.html'"></i>
+                <i class="fab fa-windows" onclick="window.location.href='download.html'"></i>
+            </div>
+        </div>
+        <div class="footer-block contact-footer">
+            <h3>Fale conosco</h3>
+            <p>pethope@email.com</p>
+            <p>0800 000 0000</p>
+        </div>
+        <div class="footer-block social-footer">
+            <h3>Nossas redes</h3>
+            <p><i class="fab fa-instagram"></i> @PetHope</p>
+            <p><i class="fab fa-facebook"></i> PetHope</p>
+            <p><i class="fab fa-twitter-square"></i> @PetHope</p>
+        </div>
     </footer>
 
-    <script src="../js/api.js"></script>
-    <script src="../js/auth.js"></script>
-    <script>
-        function updateUserUI() {
-            const perfilLink = document.getElementById('perfil-link');
-            const userLogout = document.getElementById('userLogout');
-            const loginLink = document.getElementById('loginLink');
-            
-            if (auth.isAuthenticated()) {
-                const user = auth.getUser();
-                perfilLink.style.display = 'inline';
-                perfilLink.textContent = `👤 ${user.nome}`;
-                userLogout.style.display = 'inline';
-                loginLink.style.display = 'none';
-            } else {
-                perfilLink.style.display = 'none';
-                userLogout.style.display = 'none';
-                loginLink.style.display = 'inline';
-            }
-        }
-
-        function irParaPerfil() {
-            window.location.href = 'pages/historico.html';
-        }
-
-        function handleUserMenu(event) {
-            const confirmed = confirm('Deseja fazer logout?');
-            if (confirmed) {
-                auth.logout();
-                window.location.href = 'index.html';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            updateUserUI();
-        });
-    </script>
 </body>
 </html>

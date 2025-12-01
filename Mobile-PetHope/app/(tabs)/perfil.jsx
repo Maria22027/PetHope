@@ -1,9 +1,10 @@
 import { Feather, FontAwesome5 } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback } from 'react';
 import { styles } from "../../assets/styles/PerfilScreen.styles";
 import { apiFetch, clearToken } from '../utils/api';
 
@@ -20,19 +21,22 @@ const UserProfileScreen = () => {
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [user, setUser] = useState(null);
 
-    useEffect(() => {
-      let mounted = true;
-      async function load() {
-        try {
-          const data = await apiFetch('/users/me');
-          if (mounted) setUser(data);
-        } catch (err) {
-          console.error('Erro ao carregar usuário:', err.message || err);
+    // Recarrega dados do usuário sempre que a tela recebe foco
+    useFocusEffect(
+      useCallback(() => {
+        let mounted = true;
+        async function load() {
+          try {
+            const data = await apiFetch('/users/me');
+            if (mounted) setUser(data);
+          } catch (err) {
+            console.error('Erro ao carregar usuário:', err.message || err);
+          }
         }
-      }
-      load();
-      return () => { mounted = false; };
-    }, []);
+        load();
+        return () => { mounted = false; };
+      }, [])
+    );
 
     const handleSignOut = () => {
         setShowConfirm(true);
@@ -103,21 +107,6 @@ const UserProfileScreen = () => {
           <Text style={styles.dataValue}>{user?.cidade || '—'}</Text>
         </View>
 
-        {/* Seção Informações sobre meus animais */}
-        <View style={styles.dataSection}>
-          <Text style={styles.sectionTitle}>Informações sobre meus animais</Text>
-          
-          {/* Botão Meus animais */}
-          <TouchableOpacity style={styles.animalButton} activeOpacity={0.8}>
-            <Text style={styles.animalButtonText}>Meus animais</Text>
-          </TouchableOpacity>
-          
-          {/* Botão Minhas adoções/solicitações */}
-          <TouchableOpacity style={styles.animalButton} activeOpacity={0.8}>
-            <Text style={styles.animalButtonText}>Minhas adoções/solicitações</Text>
-          </TouchableOpacity>
-        </View>
-        
         {/* Espaçador para empurrar o botão Sair para baixo (se o conteúdo for pequeno) */}
         <View style={styles.spacer} />
 

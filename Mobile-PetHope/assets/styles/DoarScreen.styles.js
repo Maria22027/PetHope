@@ -79,4 +79,39 @@ export const styles = StyleSheet.create({
     marginLeft: 8,
     fontWeight: "600",
   },
+
+  counterContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF3F3',
+    padding: 20,
+    borderRadius: 12,
+    marginTop: 20,
+    borderWidth: 2,
+    borderColor: '#E53935',
+  },
+
+  counterTextContainer: {
+    marginLeft: 15,
+    flex: 1,
+  },
+
+  counterNumber: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#E53935',
+  },
+
+  counterLabel: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+    marginTop: 2,
+  },
+
+  counterSubLabel: {
+    fontSize: 13,
+    color: '#666',
+    marginTop: 2,
+  },
 });

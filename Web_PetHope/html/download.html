@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetHope - Download</title>
+    <link rel="stylesheet" href="../styles/download.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: inherit;">PetHope</a>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="doacao-sangue.html" class="nav-link">Doação de Sangue</a>
+            <a href="animais.html" class="nav-link">Animais</a>
+            <a href="campanhas.html" class="nav-link">Campanhas</a>
+            <a href="download.html" class="nav-link">Download</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="download-header">
+            <h1>Faça o download do nosso <strong>aplicativo</strong></h1>
+            <hr class="divider">
+            <p>O PetHope conecta tutores, ONGs e veterinários em uma única plataforma.</p>
+            <p>Adote, doe e salve vidas com apenas alguns cliques.</p>
+        </section>
+
+        <section class="app-section">
+            <div class="app-details">
+                <h2>Ideal para tutores e adotantes: <strong>PetHope Mobile</strong></h2>
+                <p>Leve o cuidado com você em qualquer lugar.</p>
+                <p>Com o aplicativo no celular, você pode:</p>
+                <ul>
+                    <li>Solicitar adoção de animais</li>
+                    <li>Cadastrar seu pet como doador de sangue</li>
+                    <li>Acompanhar notificações e atualizações em tempo real</li>
+                    <li>Interagir com a comunidade PetHope</li>
+                </ul>
+                <button class="download-btn" onclick="downloadMobileApp()">
+                    <i class="fab fa-android"></i> Baixar para Android
+                </button>
+            </div>
+            <div class="app-card mobile-card">
+                <i class="fab fa-android"></i>
+                <p>Tutor/ONGs/Veterinários</p>
+            </div>
+        </section>
+
+        <section class="app-section desktop-section">
+            <div class="app-details">
+                <h2>Para ONGs e Veterinários: <strong>PetHope Desktop</strong></h2>
+                <p>Ferramenta de gerenciamento completa para ONGs e veterinários.</p>
+                <p>Na versão desktop, é possível:</p>
+                <ul>
+                    <li>Cadastrar animais para adoção ou doação</li>
+                    <li>Organizar solicitações recebidas</li>
+                    <li>Gerenciar agendamentos de exames e doações</li>
+                    <li>Gerar relatórios e acompanhar estatísticas</li>
+                </ul>
+                <button class="download-btn" onclick="downloadDesktopApp()">
+                    <i class="fab fa-windows"></i> Baixar para Windows
+                </button>
+            </div>
+            <div class="app-card desktop-card">
+                <i class="fab fa-windows"></i>
+                <p>ONGs/Veterinários</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-block download-footer">
+            <h3>Faça download do nosso <strong>aplicativo</strong></h3>
+            <div class="download-buttons">
+                <i class="fab fa-android" onclick="downloadMobileApp()"></i>
+                <i class="fab fa-windows" onclick="downloadDesktopApp()"></i>
+            </div>
+        </div>
+        <div class="footer-block contact-footer">
+            <h3>Fale conosco</h3>
+            <p>pethope@email.com</p>
+            <p>0800 000 0000</p>
+        </div>
+        <div class="footer-block social-footer">
+            <h3>Nossas redes</h3>
+            <p><i class="fab fa-instagram"></i> @PetHope</p>
+            <p><i class="fab fa-facebook"></i> PetHope</p>
+            <p><i class="fab fa-twitter-square"></i> @PetHope</p>
+        </div>
+    </footer>
+
+    <script>
+        function downloadMobileApp() {
+            // Função para download do app mobile (APK)
+            // Será implementada quando o APK estiver disponível
+            alert('Download do aplicativo mobile em breve!');
+        }
+
+        function downloadDesktopApp() {
+            // Função para download do app desktop
+            // Será implementada quando o instalador estiver disponível
+            alert('Download do aplicativo desktop em breve!');
+        }
+    </script>
+</body>
+</html>
