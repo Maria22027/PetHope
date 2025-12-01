@@ -3,7 +3,7 @@
 
 module.exports = {
     // URL da API - modifique conforme necessário
-    API_BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:3000',
+    API_BASE_URL: process.env.REACT_APP_API_URL || 'https://pethope-aw8q.onrender.com',
     
     // Configurações de timeout
     API_TIMEOUT: 10000,

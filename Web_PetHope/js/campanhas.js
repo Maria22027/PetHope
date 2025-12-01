@@ -1,6 +1,6 @@
 // campanhas.js - Funções para buscar e exibir campanhas
 
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://pethope-aw8q.onrender.com';
 
 // Buscar todas as campanhas
 async function buscarCampanhas() {

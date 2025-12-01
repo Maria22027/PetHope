@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://pethope-aw8q.onrender.com';
 
 // Função para carregar os animais da API com limite
 async function carregarAnimais(limite = 6) {

@@ -6,6 +6,6 @@ const isLocalDev = Platform.OS === 'web' ? process.env.NODE_ENV === 'development
 // URL da API (sem /api no final, pois o backend não usa esse prefixo)
 export const API_URL = isLocalDev
   ? "http://localhost:3000"
-  : "https://pethope.onrender.com";
+  : "https://pethope-aw8q.onrender.com";
 
 console.log('API_URL:', API_URL, 'Platform:', Platform.OS);

@@ -95,15 +95,23 @@
 
     <script>
         function downloadMobileApp() {
-            // Função para download do app mobile (APK)
-            // Será implementada quando o APK estiver disponível
-            alert('Download do aplicativo mobile em breve!');
+            // Download do APK Android
+            const link = document.createElement('a');
+            link.href = '../downloads/pethope.apk';
+            link.download = 'PetHope.apk';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         function downloadDesktopApp() {
-            // Função para download do app desktop
-            // Será implementada quando o instalador estiver disponível
-            alert('Download do aplicativo desktop em breve!');
+            // Download do instalador Windows
+            const link = document.createElement('a');
+            link.href = '../downloads/PetHope-Setup.exe';
+            link.download = 'PetHope-Setup.exe';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 </body>
