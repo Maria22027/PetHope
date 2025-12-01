@@ -664,124 +664,6 @@ A documentação Swagger permite:
 ✅ Sanitização de queries MongoDB  
 ✅ Variáveis de ambiente para informações sensíveis
 
-### Recomendações para Produção
-
-- [ ] Use HTTPS em produção
-- [ ] Configure CORS para domínios específicos
-- [ ] Implemente rate limiting
-- [ ] Use MongoDB Atlas com autenticação
-- [ ] Configure logs de auditoria
-- [ ] Implemente refresh tokens
-- [ ] Use variáveis de ambiente fortes (JWT_SECRET com 256+ bits)
-
----
-
-## 🚀 Deploy
-
-### Backend (API)
-
-**Opções recomendadas:**
-
-1. **Render** (gratuito)
-2. **Railway**
-3. **Heroku**
-4. **DigitalOcean App Platform**
-
-**Exemplo - Deploy no Render:**
-
-1. Crie conta em render.com
-2. Conecte seu repositório GitHub
-3. Configure variáveis de ambiente
-4. Deploy automático a cada push
-
-### Frontend Web
-
-**Opções recomendadas:**
-
-1. **Vercel** (gratuito, otimizado)
-2. **Netlify**
-3. **GitHub Pages**
-4. **Firebase Hosting**
-
-### Mobile App
-
-**Publicação:**
-
-1. **iOS:** App Store (requer conta Apple Developer - $99/ano)
-2. **Android:** Google Play Store (taxa única de $25)
-
-**Build com Expo:**
-
-```bash
-# Build para Android (APK)
-expo build:android
-
-# Build para iOS (IPA)
-expo build:ios
-```
-
-### Desktop App
-
-**Empacotamento:**
-
-```bash
-npm install --save-dev electron-builder
-
-# Build para Windows
-electron-builder --windows
-
-# Build para macOS
-electron-builder --mac
-
-# Build para Linux
-electron-builder --linux
-```
-
----
-
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Siga os passos:
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/NovaFuncionalidade`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/NovaFuncionalidade`)
-5. Abra um Pull Request
-
-### Padrões de Código
-
-- Use **camelCase** para variáveis e funções
-- Use **PascalCase** para componentes React
-- Documente funções complexas
-- Escreva testes para novas funcionalidades
-- Siga o padrão de commits semânticos
-
----
-
-## 🐛 Problemas Conhecidos
-
-- [ ] Upload de imagens ainda não implementado (usando APIs públicas temporariamente)
-- [ ] Notificações push pendentes no mobile
-- [ ] Sistema de chat entre usuários em desenvolvimento
-
----
-
-## 📈 Roadmap
-
-### Versão 2.0 (Planejado)
-
-- [ ] Sistema de mensagens entre tutores e ONGs
-- [ ] Notificações push
-- [ ] Upload de imagens próprio com Cloudinary
-- [ ] Filtros avançados de busca
-- [ ] Geolocalização de pets e campanhas
-- [ ] Integração com redes sociais
-- [ ] Dashboard administrativo
-- [ ] Sistema de avaliações e comentários
-- [ ] Modo escuro
-- [ ] Internacionalização (i18n)
-
 ---
 
 ## 👥 Autores
@@ -789,14 +671,14 @@ Contribuições são bem-vindas! Siga os passos:
 <table>
   <tr>
     <td align="center">
-      <a href="https://github.com/pedrowolski">
-        <img src="https://github.com/pedrowolski.png" width="100px;" alt="Pedro Wolski"/><br>
+      <a href="https://github.com/iampdrin">
+        <img src="https://github.com/iampdrin.png" width="100px;" alt="Pedro Wolski"/><br>
         <sub><b>Pedro Wolski</b></sub>
       </a>
     </td>
     <td align="center">
-      <a href="https://github.com/thiagosouza">
-        <img src="https://github.com/thiagosouza.png" width="100px;" alt="Thiago Souza"/><br>
+      <a href="https://github.com/KingTayko">
+        <img src="https://github.com/KingTayko.png" width="100px;" alt="Thiago Souza"/><br>
         <sub><b>Thiago Souza</b></sub>
       </a>
     </td>
