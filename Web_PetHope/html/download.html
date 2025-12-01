@@ -94,24 +94,54 @@
     </footer>
 
     <script>
-        function downloadMobileApp() {
-            // Download do APK Android
-            const link = document.createElement('a');
-            link.href = '../downloads/pethope.apk';
-            link.download = 'PetHope.apk';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        async function downloadMobileApp() {
+            const apkPath = '../downloads/pethope.apk';
+            
+            try {
+                // Verifica se o arquivo existe
+                const response = await fetch(apkPath, { method: 'HEAD' });
+                
+                if (response.ok) {
+                    // Download do APK Android
+                    const link = document.createElement('a');
+                    link.href = apkPath;
+                    link.download = 'PetHope.apk';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } else {
+                    // Fallback: redireciona para o build do Expo
+                    alert('Redirecionando para o download do APK via Expo...');
+                    window.open('https://expo.dev/accounts/wolski/projects/pethope/builds/2af5b255-63a8-4615-b1a4-6efaaaf3d0d0', '_blank');
+                }
+            } catch (error) {
+                // Em caso de erro, redireciona para o Expo
+                alert('Redirecionando para o download do APK via Expo...');
+                window.open('https://expo.dev/accounts/wolski/projects/pethope/builds/2af5b255-63a8-4615-b1a4-6efaaaf3d0d0', '_blank');
+            }
         }
 
-        function downloadDesktopApp() {
-            // Download do instalador Windows
-            const link = document.createElement('a');
-            link.href = '../downloads/PetHope-Setup.exe';
-            link.download = 'PetHope-Setup.exe';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        async function downloadDesktopApp() {
+            const exePath = '../downloads/PetHope-Setup.exe';
+            
+            try {
+                // Verifica se o arquivo existe
+                const response = await fetch(exePath, { method: 'HEAD' });
+                
+                if (response.ok) {
+                    // Download do instalador Windows
+                    const link = document.createElement('a');
+                    link.href = exePath;
+                    link.download = 'PetHope-Setup.exe';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } else {
+                    alert('Instalador não disponível no momento. Entre em contato para obter o arquivo.');
+                }
+            } catch (error) {
+                alert('Erro ao baixar o instalador. Tente novamente mais tarde.');
+            }
         }
     </script>
 </body>

@@ -16,6 +16,27 @@
 
 ---
 
+## 🚀 Acesso Rápido
+
+### 🌐 Plataformas no Ar
+
+- **API Backend**: [https://pethope-aw8q.onrender.com](https://pethope-aw8q.onrender.com)
+- **Documentação API**: [https://pethope-aw8q.onrender.com/api-docs](https://pethope-aw8q.onrender.com/api-docs)
+
+### 📱 Downloads
+
+- **Mobile (Android APK)**: [Baixar via Expo](https://expo.dev/accounts/wolski/projects/pethope/builds/2af5b255-63a8-4615-b1a4-6efaaaf3d0d0)
+  - Escaneie o QR Code no link acima ou baixe diretamente o APK
+  - Também disponível em: `Web_PetHope/downloads/pethope.apk` (após clonar o repo)
+
+- **Desktop (Windows)**: Disponível em `Web_PetHope/downloads/PetHope-Setup.exe` (após clonar o repo)
+  - Instalador completo de ~71 MB
+  - Suporte a Windows 10/11 (x64)
+
+> 💡 **Nota**: Para instruções completas de deploy e build, consulte [`deploy.md`](deploy.md)
+
+---
+
 ## 📋 Sumário
 
 - [Sobre o Projeto](#-sobre-o-projeto)
