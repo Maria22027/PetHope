@@ -2,10 +2,19 @@
   publish = "."
   command = "echo 'No build needed - static site'"
 
+# Servir arquivos de download diretamente (sem redirect)
+[[redirects]]
+  from = "/downloads/*"
+  to = "/downloads/:splat"
+  status = 200
+  force = false
+
+# Redirect apenas para páginas HTML
 [[redirects]]
   from = "/*"
-  to = "/html/index.html"
+  to = "/html/:splat"
   status = 200
+  conditions = {Role = ["html"]}
 
 # Headers para CORS e segurança
 [[headers]]
@@ -15,3 +24,10 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "no-referrer"
+
+# Headers específicos para downloads (permitir executáveis)
+[[headers]]
+  for = "/downloads/*"
+  [headers.values]
+    Content-Type = "application/octet-stream"
+    Content-Disposition = "attachment"
