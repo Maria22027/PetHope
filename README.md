@@ -689,8 +689,8 @@ A documentação Swagger permite:
       </a>
     </td>
     <td align="center">
-      <a href="https://github.com/eduardoamorim">
-        <img src="https://github.com/eduardoamorim.png" width="100px;" alt="Eduardo Amorim"/><br>
+      <a href="https://github.com/duh2467">
+        <img src="https://github.com/duh2467.png" width="100px;" alt="Eduardo Amorim"/><br>
         <sub><b>Eduardo Amorim</b></sub>
       </a>
     </td>
