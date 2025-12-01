@@ -20,6 +20,7 @@
 
 ### 🌐 Plataformas no Ar
 
+- **Site Web**: [https://helpful-pegasus-b1baa9.netlify.app/html/](https://helpful-pegasus-b1baa9.netlify.app/html/)
 - **API Backend**: [https://pethope-aw8q.onrender.com](https://pethope-aw8q.onrender.com)
 - **Documentação API**: [https://pethope-aw8q.onrender.com/api-docs](https://pethope-aw8q.onrender.com/api-docs)
 
