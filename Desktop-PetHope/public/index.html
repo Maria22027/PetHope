@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetHope</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen active">
+        <div class="cloud-top-left"></div>
+        
+        <div class="login-container">
+            <h1>Login</h1>
+            
+            <form id="login-form" class="login-form">
+                <input type="email" id="login-email" placeholder="Email" class="input-field" required>
+                
+                <div class="password-group">
+                    <input type="password" id="login-password" placeholder="Senha" class="input-field password-field" required>
+                    <span class="show-password" onclick="togglePasswordVisibility('login-password')">Mostrar senha</span>
+                </div>
+
+                <div id="login-error" class="error-message"></div>
+                <div id="login-loading" class="loading-message"></div>
+                
+                <button type="submit" class="btn-login">Entrar</button>
+            </form>
+            
+            <div class="register-area">
+                <span>Não tem conta?</span>
+                <button type="button" class="btn-register" onclick="showRegisterScreen()">Cadastre-se</button>
+            </div>
+        </div>
+        
+        <div class="cloud-bottom-right"></div>
+    </div>
+
+    <!-- Register Screen -->
+    <div id="register-screen" class="screen">
+        <div class="cloud-top-left"></div>
+        
+        <div class="register-container">
+            <h1>Cadastro</h1>
+            
+            <form id="register-form" class="register-form">
+                <input type="text" id="register-name" placeholder="Nome completo" class="input-field" required>
+                
+                <input type="email" id="register-email" placeholder="Email" class="input-field" required>
+                
+                <div class="password-group">
+                    <input type="password" id="register-password" placeholder="Senha" class="input-field password-field" required>
+                    <span class="show-password" onclick="togglePasswordVisibility('register-password')">Mostrar senha</span>
+                </div>
+
+                <div class="type-group">
+                    <label>Tipo de usuário:</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="tipo" value="tutor" onchange="updateRegisterFields()"> Tutor
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="tipo" value="ong" onchange="updateRegisterFields()"> ONG
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="tipo" value="clinica" onchange="updateRegisterFields()"> Clínica
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Campos adicionais para ONG -->
+                <div id="ong-fields" style="display: none;">
+                    <input type="text" id="register-nomeOrganizacao" placeholder="Nome da Organização" class="input-field">
+                    <input type="text" id="register-cnpj" placeholder="CNPJ" class="input-field">
+                    <input type="tel" id="register-telefone-ong" placeholder="Telefone" class="input-field">
+                    <input type="text" id="register-endereco-ong" placeholder="Endereço" class="input-field">
+                </div>
+
+                <!-- Campos adicionais para Clínica -->
+                <div id="clinica-fields" style="display: none;">
+                    <input type="text" id="register-nomeClinica" placeholder="Nome da Clínica" class="input-field">
+                    <input type="text" id="register-cnpj-clinica" placeholder="CNPJ" class="input-field">
+                    <input type="text" id="register-crmv" placeholder="CRMV" class="input-field">
+                    <input type="tel" id="register-telefone-clinica" placeholder="Telefone" class="input-field">
+                    <input type="text" id="register-endereco-clinica" placeholder="Endereço" class="input-field">
+                </div>
+
+                <div id="register-error" class="error-message"></div>
+                <div id="register-loading" class="loading-message"></div>
+                
+                <button type="submit" class="btn-login">Cadastrar</button>
+            </form>
+            
+            <div class="register-area">
+                <button type="button" class="btn-register" onclick="showLoginScreen()">Voltar ao Login</button>
+            </div>
+        </div>
+        
+        <div class="cloud-bottom-right"></div>
+    </div>
+
+    <!-- Tutor Access Denied Screen -->
+    <div id="tutor-restricted-screen" class="screen">
+        <div class="cloud-top-left"></div>
+        
+        <div class="restricted-container">
+            <div class="restricted-icon">🐾</div>
+            <h1>Bem-vindo ao PetHope!</h1>
+            <p class="restricted-message">Sua conta de tutor foi criada com sucesso!</p>
+            
+            <div class="restricted-info">
+                <h2>Próximos Passos</h2>
+                <p>Para gerenciar seus pets e participar de campanhas de adoção e doação de sangue, acesse o PetHope através dos nossos aplicativos:</p>
+                
+                <div class="access-options">
+                    <div class="access-option">
+                        <div class="option-icon">📱</div>
+                        <h3>Aplicativo Mobile</h3>
+                        <p>Acesse no seu smartphone para uma experiência completa como tutor</p>
+                    </div>
+                    
+                    <div class="access-option">
+                        <div class="option-icon">💻</div>
+                        <h3>Aplicativo Web</h3>
+                        <p>Acesse pelo navegador no seu computador</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="restricted-actions">
+                <button type="button" class="btn-logout" onclick="logout()">Sair</button>
+            </div>
+        </div>
+        
+        <div class="cloud-bottom-right"></div>
+    </div>
+
+    <!-- Home Screen -->
+    <div id="home-screen" class="screen">
+        <div class="home-container">
+            <div class="home-header">
+                <h1>Bem-vindo ao PetHope! 🐾</h1>
+                <p id="user-info"></p>
+            </div>
+
+            <div class="home-content">
+                <div class="welcome-message">
+                    <h2>Login realizado com sucesso!</h2>
+                    <p>Você está autenticado e conectado à API PetHope.</p>
+                </div>
+
+                <div class="home-buttons">
+                    <button type="button" class="btn-home" onclick="showPetsScreen()">
+                        🐶 Gerenciar Pets
+                    </button>
+                    <button type="button" class="btn-home" onclick="showCampaignsScreen()">
+                        📢 Gerenciar Campanhas
+                    </button>
+                    <button type="button" class="btn-home" onclick="showUserScreen()">
+                        👤 Meu Perfil
+                    </button>
+                </div>
+            </div>
+
+            <div class="home-actions">
+                <button type="button" class="btn-logout" onclick="logout()">Sair</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pets Screen -->
+    <div id="pets-screen" class="screen">
+        <div class="pets-container">
+            <div class="pets-header">
+                <h1>Gerenciar Pets 🐾</h1>
+                <button type="button" class="btn-new-item" onclick="showNewPetModal()">+ Novo Pet</button>
+            </div>
+
+            <div id="pets-list" class="items-list">
+                <div class="loading">Carregando pets...</div>
+            </div>
+
+            <div class="items-actions">
+                <button type="button" class="btn-back" onclick="showHomeScreen()">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- New/Edit Pet Modal -->
+    <div id="pet-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePetModal()">&times;</span>
+            <h2 id="pet-modal-title">Novo Pet</h2>
+            
+            <form id="pet-form" class="pet-form">
+                <input type="hidden" id="pet-id">
+
+                <input type="text" id="pet-nome" placeholder="Nome do pet" class="input-field" required>
+                
+                <input type="text" id="pet-especie" placeholder="Espécie (Cachorro, Gato, etc)" class="input-field" required>
+                
+                <input type="number" id="pet-idade" placeholder="Idade" class="input-field" required>
+                
+                <input type="text" id="pet-tipoSanguineo" placeholder="Tipo Sanguíneo" class="input-field">
+                
+                <select id="pet-status" class="input-field" required>
+                    <option value="">Selecione o status</option>
+                    <option value="adocao">Adoção</option>
+                    <option value="doacao-sangue">Doação de Sangue</option>
+                    <option value="adocao-doacao-sangue">Adoção + Doação de Sangue</option>
+                </select>
+                
+                <textarea id="pet-descricao" placeholder="Descrição do pet" class="input-field textarea" rows="4"></textarea>
+                
+                <div class="form-group">
+                    <label for="pet-foto" class="file-label">Foto do Pet (opcional)</label>
+                    <input type="file" id="pet-foto" accept="image/*" class="input-file">
+                    <div id="pet-foto-preview" class="foto-preview"></div>
+                </div>
+                
+                <div id="pet-modal-error" class="error-message"></div>
+                <div id="pet-modal-loading" class="loading-message"></div>
+                
+                <button type="submit" class="btn-login">Salvar Pet</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Campaigns Screen -->
+    <div id="campaigns-screen" class="screen">
+        <div class="campaigns-container">
+            <div class="campaigns-header">
+                <h1>Gerenciar Campanhas 📢</h1>
+                <button type="button" class="btn-new-item" onclick="showNewCampaignModal()">+ Nova Campanha</button>
+            </div>
+
+            <div id="campaigns-list" class="items-list">
+                <div class="loading">Carregando campanhas...</div>
+            </div>
+
+            <div class="items-actions">
+                <button type="button" class="btn-back" onclick="showHomeScreen()">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- New/Edit Campaign Modal -->
+    <div id="campaign-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCampaignModal()">&times;</span>
+            <h2 id="campaign-modal-title">Nova Campanha</h2>
+            
+            <form id="campaign-form" class="campaign-form">
+                <input type="hidden" id="campaign-id">
+
+                <input type="text" id="campaign-titulo" placeholder="Título da campanha" class="input-field" required>
+                
+                <textarea id="campaign-descricao" placeholder="Descrição da campanha" class="input-field textarea" rows="6"></textarea>
+                
+                <div id="campaign-modal-error" class="error-message"></div>
+                <div id="campaign-modal-loading" class="loading-message"></div>
+                
+                <button type="submit" class="btn-login">Salvar Campanha</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Profile Screen -->
+    <div id="user-screen" class="screen">
+        <div class="user-container">
+            <div class="user-header">
+                <h1>Meu Perfil 👤</h1>
+                <button type="button" class="btn-new-item" onclick="showEditProfileModal()">✏️ Editar Perfil</button>
+            </div>
+
+            <div class="user-info-container" id="user-info-container">
+                <div class="loading">Carregando informações do perfil...</div>
+            </div>
+
+            <div class="user-actions">
+                <button type="button" class="btn-logout" onclick="logout()">Fazer Logout</button>
+                <button type="button" class="btn-back" onclick="showHomeScreen()">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditProfileModal()">&times;</span>
+            <h2 id="edit-profile-modal-title">Editar Perfil</h2>
+            
+            <form id="edit-profile-form" class="pet-form">
+                <input type="text" id="edit-nome" placeholder="Nome" class="input-field" required>
+                
+                <input type="email" id="edit-email" placeholder="Email" class="input-field" required>
+                
+                <input type="text" id="edit-telefone" placeholder="Telefone" class="input-field">
+                
+                <!-- Campos específicos para ONG -->
+                <div id="edit-ong-fields" style="display: none;">
+                    <input type="text" id="edit-nomeOrganizacao" placeholder="Nome da Organização" class="input-field">
+                    <input type="text" id="edit-cnpj" placeholder="CNPJ" class="input-field">
+                </div>
+                
+                <!-- Campos específicos para Clínica -->
+                <div id="edit-clinica-fields" style="display: none;">
+                    <input type="text" id="edit-nomeClinica" placeholder="Nome da Clínica" class="input-field">
+                    <input type="text" id="edit-cnpj-clinica" placeholder="CNPJ" class="input-field">
+                    <input type="text" id="edit-crmv" placeholder="CRMV do Responsável" class="input-field">
+                </div>
+                
+                <!-- Endereço -->
+                <div id="edit-endereco-fields">
+                    <input type="text" id="edit-endereco-rua" placeholder="Endereço (Rua, Número)" class="input-field">
+                    <input type="text" id="edit-endereco-cidade" placeholder="Cidade" class="input-field">
+                    <input type="text" id="edit-endereco-uf" placeholder="UF" class="input-field" maxlength="2">
+                </div>
+                
+                <div class="password-section">
+                    <h3>Alterar Senha (opcional)</h3>
+                    <input type="password" id="edit-senha" placeholder="Nova Senha" class="input-field">
+                </div>
+                
+                <div id="edit-profile-modal-error" class="error-message"></div>
+                <div id="edit-profile-modal-loading" class="loading-message"></div>
+                
+                <button type="submit" class="btn-login">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

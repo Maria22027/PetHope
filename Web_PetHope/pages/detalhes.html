@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Animal - PetHope</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .pet-image {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .info-group {
+            margin-bottom: 1rem;
+        }
+
+        .info-group strong {
+            color: #4CAF50;
+        }
+
+        .actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .btn-secondary {
+            background-color: #999;
+        }
+
+        .btn-secondary:hover {
+            background-color: #777;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.2rem;
+            color: #999;
+        }
+
+        .error {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.2rem;
+            color: #d32f2f;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PetHope</h1>
+    </header>
+
+    <nav>
+        <a href="../index.html">Início</a>
+        <a href="../animais.html">Animais</a>
+        <a href="../adocao.html">Adoção</a>
+        <a href="../doacao-sangue.html">Doação de Sangue</a>
+        <a id="perfil-link" style="display:none; cursor:pointer;" onclick="irParaPerfil()">Perfil</a>
+        <a id="loginLink" href="login.html">Login</a>
+    </nav>
+
+    <div class="container">
+        <a href="../animais.html" class="back-btn">← Voltar para Animais</a>
+
+        <div id="detalhes-animal" class="loading">
+            Carregando informações do animal...
+        </div>
+
+        <div id="error" class="error" style="display:none;"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 PetHope - Todos os direitos reservados</p>
+    </footer>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        function updateUserUI() {
+            const perfilLink = document.getElementById('perfil-link');
+            const loginLink = document.getElementById('loginLink');
+            
+            if (auth.isAuthenticated()) {
+                const user = auth.getUser();
+                perfilLink.style.display = 'inline';
+                perfilLink.textContent = `👤 ${user.nome}`;
+                loginLink.style.display = 'none';
+            } else {
+                perfilLink.style.display = 'none';
+                loginLink.style.display = 'inline';
+            }
+        }
+
+        function irParaPerfil() {
+            window.location.href = 'historico.html';
+        }
+
+        // Carregar detalhes do animal
+        async function carregarDetalhes() {
+            const params = new URLSearchParams(window.location.search);
+            const petId = params.get('id');
+
+            if (!petId) {
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').textContent = 'ID do animal não fornecido';
+                document.getElementById('detalhes-animal').style.display = 'none';
+                return;
+            }
+
+            try {
+                const pet = await api.getPetPorId(petId);
+                const container = document.getElementById('detalhes-animal');
+
+                container.innerHTML = `
+                    <img src="../img/placeholder.jpg" alt="${pet.nome}" class="pet-image">
+                    <h2>${pet.nome}</h2>
+                    
+                    <div class="info-group">
+                        <strong>Espécie:</strong> ${pet.especie}
+                    </div>
+
+                    <div class="info-group">
+                        <strong>Idade:</strong> ${pet.idade ? pet.idade + ' anos' : 'Desconhecida'}
+                    </div>
+
+                    ${pet.tipoSanguineo ? `
+                        <div class="info-group">
+                            <strong>Tipo Sanguíneo:</strong> ${pet.tipoSanguineo}
+                        </div>
+                    ` : ''}
+
+                    ${pet.descricao ? `
+                        <div class="info-group">
+                            <strong>Descrição:</strong> ${pet.descricao}
+                        </div>
+                    ` : ''}
+
+                    <div class="info-group">
+                        <strong>Status:</strong> ${pet.status === 'adocao' ? '✓ Disponível para adoção' : 
+                                                      pet.status === 'doacao' ? '✓ Disponível para doação de sangue' : 
+                                                      'Indisponível'}
+                    </div>
+
+                    <div class="actions">
+                        ${pet.status === 'adocao' ? `
+                            <button class="btn" onclick="iniciarAdocao('${pet._id}')">
+                                Iniciar Processo de Adoção
+                            </button>
+                        ` : ''}
+
+                        ${pet.status === 'doacao' ? `
+                            <button class="btn" onclick="iniciarDoacao('${pet._id}')">
+                                Participar da Doação
+                            </button>
+                        ` : ''}
+
+                        <button class="btn btn-secondary" onclick="window.history.back()">
+                            Voltar
+                        </button>
+                    </div>
+                `;
+
+                container.classList.remove('loading');
+            } catch (error) {
+                console.error('Erro ao carregar detalhes:', error);
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').textContent = 'Erro ao carregar informações do animal';
+                document.getElementById('detalhes-animal').style.display = 'none';
+            }
+        }
+
+        async function iniciarAdocao(petId) {
+            if (!auth.isAuthenticated()) {
+                alert('Você precisa fazer login para adotar um animal');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const descricao = prompt('Deixe uma mensagem sobre sua intenção de adotar:');
+                if (!descricao) return;
+
+                const usuario = auth.getUser();
+                await api.criarHistorico('adocao', descricao, petId, usuario.id);
+                alert('Solicitação de adoção enviada com sucesso! Um responsável entrará em contato.');
+            } catch (error) {
+                alert('Erro ao enviar solicitação de adoção');
+                console.error(error);
+            }
+        }
+
+        async function iniciarDoacao(petId) {
+            if (!auth.isAuthenticated()) {
+                alert('Você precisa fazer login para participar da doação');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const descricao = prompt('Deixe uma mensagem sobre a intenção de participar:');
+                if (!descricao) return;
+
+                const usuario = auth.getUser();
+                await api.criarHistorico('doacao', descricao, petId, usuario.id);
+                alert('Inscrição de doação enviada com sucesso! Um veterinário entrará em contato.');
+            } catch (error) {
+                alert('Erro ao enviar inscrição de doação');
+                console.error(error);
+            }
+        }
+
+        // Carregar dados ao abrir página
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUserUI();
+            carregarDetalhes();
+        });
+    </script>
+</body>
+</html>

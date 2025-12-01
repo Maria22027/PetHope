@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes - PetHope</title>
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/detalhes.css">
+</head>
+<body>
+    <header>
+        <h1>PetHope</h1>
+        <nav>
+            <a href="../index.html">Início</a>
+            <a href="../animais.html">Animais</a>
+            <a href="../adocao.html">Adoção</a>
+            <a href="../doacao-sangue.html">Doação de Sangue</a>
+            <a id="perfil-link" style="display:none; cursor:pointer;" onclick="irParaPerfil()">Perfil</a>
+            <a id="userLogout" style="display:none; cursor:pointer;" onclick="handleUserMenu(event)">Logout</a>
+            <a id="loginLink" href="pages/login.html">Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="detalhes-container" id="detalhes">
+            <!-- Conteúdo será carregado pelo JS -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 PetHope</p>
+    </footer>
+
+    <script src="../../js/api.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script>
+        let petId = null;
+
+        // Extrair ID do URL
+        function getPetIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        // Gerenciar exibição de login/usuário
+        function updateUserUI() {
+            const perfilLink = document.getElementById('perfil-link');
+            const userLogout = document.getElementById('userLogout');
+            const loginLink = document.getElementById('loginLink');
+            
+            if (auth.isAuthenticated()) {
+                const user = auth.getUser();
+                perfilLink.style.display = 'inline';
+                perfilLink.textContent = `👤 ${user.nome}`;
+                userLogout.style.display = 'inline';
+                loginLink.style.display = 'none';
+            } else {
+                perfilLink.style.display = 'none';
+                userLogout.style.display = 'none';
+                loginLink.style.display = 'inline';
+            }
+        }
+
+        function irParaPerfil() {
+            window.location.href = 'historico.html';
+        }
+
+        function handleUserMenu(event) {
+            const confirmed = confirm('Deseja fazer logout?');
+            if (confirmed) {
+                auth.logout();
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Carregar detalhes do animal
+        async function carregarDetalhes() {
+            try {
+                petId = getPetIdFromUrl();
+                
+                if (!petId) {
+                    document.getElementById('detalhes').innerHTML = '<p>Nenhum animal selecionado.</p>';
+                    return;
+                }
+
+                const pet = await api.getPetPorId(petId);
+                const detalhesDiv = document.getElementById('detalhes');
+
+                detalhesDiv.innerHTML = `
+                    <div class="pet-details">
+                        <img src="../../img/${pet.imagem}" alt="${pet.nome}">
+                        <div class="info">
+                            <h2>${pet.nome}</h2>
+                            <p><strong>Raça:</strong> ${pet.raca}</p>
+                            <p><strong>Idade:</strong> ${pet.idade} anos</p>
+                            <p><strong>Descrição:</strong> ${pet.descricao}</p>
+                            <p><strong>Status:</strong> ${pet.status}</p>
+                            
+                            <div class="actions">
+                                ${pet.status === 'adocao' ? `
+                                    <button class="btn" onclick="iniciarAdocao()">Quero Adotar</button>
+                                ` : ''}
+                                
+                                ${pet.status === 'doacao' ? `
+                                    <button class="btn" onclick="iniciarDoacao()">Participar de Doação</button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Erro ao carregar detalhes:', error);
+                document.getElementById('detalhes').innerHTML = '<p>Erro ao carregar informações do animal.</p>';
+            }
+        }
+
+        // Funções para ações
+        async function iniciarAdocao() {
+            if (!auth.isAuthenticated()) {
+                alert('Faça login para continuar!');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const usuario = auth.getUser();
+            try {
+                await api.criarHistorico('adocao', 'Iniciou processo de adoção', petId, usuario.id);
+                alert('Solicitação de adoção registrada! Verifique seu histórico para mais informações.');
+                window.location.href = 'historico.html';
+            } catch (error) {
+                alert('Erro ao registrar solicitação: ' + error.message);
+            }
+        }
+
+        async function iniciarDoacao() {
+            if (!auth.isAuthenticated()) {
+                alert('Faça login para continuar!');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const usuario = auth.getUser();
+            try {
+                await api.criarHistorico('doacao', 'Participou do programa de doação de sangue', petId, usuario.id);
+                alert('Participação registrada! Verifique seu histórico para mais informações.');
+                window.location.href = 'historico.html';
+            } catch (error) {
+                alert('Erro ao registrar participação: ' + error.message);
+            }
+        }
+
+        // Carregar dados ao abrir página
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUserUI();
+            carregarDetalhes();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Adoção de Animais</title>
+    <link rel="stylesheet" href="../styles/adocao.css">
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <header>
+        <h1>PetHope</h1>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="animais.html">Animais</a>
+            <a href="doacao-sangue.html">Doação de Sangue</a>
+            <a id="perfil-link" style="display:none; cursor:pointer;" onclick="irParaPerfil()">Perfil</a>
+            <a id="userLogout" style="display:none; cursor:pointer;" onclick="handleUserMenu(event)">Logout</a>
+            <a id="loginLink" href="pages/login.html">Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Como funciona a adoção</h2>
+            <p>A adoção é um processo cuidadoso para garantir que o animal encontre um lar amoroso.</p>
+            <ul>
+                <li>Escolha o animal que você deseja adotar.</li>
+                <li>Preencha o formulário de adoção.</li>
+                <li>O responsável analisará sua solicitação.</li>
+                <li>Se aprovado, você poderá levar seu novo amigo para casa!</li>
+            </ul>
+            <p>Temos cães, gatos, porquinhos-da-índia e muito mais!</p>
+        </section>
+
+        <section>
+            <h2>Dicas para adoção responsável</h2>
+            <p>Antes de adotar, considere:</p>
+            <ul>
+                <li>Tempo disponível para cuidar do animal</li>
+                <li>Espaço adequado em casa</li>
+                <li>Custos com alimentação e veterinário</li>
+            </ul>
+        </section>
+
+        <button onclick="window.location.href='animais.html'" class="btn">Ver Animais Disponíveis</button>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 PetHope</p>
+    </footer>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        function updateUserUI() {
+            const perfilLink = document.getElementById('perfil-link');
+            const userLogout = document.getElementById('userLogout');
+            const loginLink = document.getElementById('loginLink');
+            
+            if (auth.isAuthenticated()) {
+                const user = auth.getUser();
+                perfilLink.style.display = 'inline';
+                perfilLink.textContent = `👤 ${user.nome}`;
+                userLogout.style.display = 'inline';
+                loginLink.style.display = 'none';
+            } else {
+                perfilLink.style.display = 'none';
+                userLogout.style.display = 'none';
+                loginLink.style.display = 'inline';
+            }
+        }
+
+        function irParaPerfil() {
+            window.location.href = 'pages/historico.html';
+        }
+
+        function handleUserMenu(event) {
+            const confirmed = confirm('Deseja fazer logout?');
+            if (confirmed) {
+                auth.logout();
+                window.location.href = 'index.html';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUserUI();
+        });
+    </script>
+</body>
+</html>

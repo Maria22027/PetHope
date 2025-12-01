@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login/Registro - PetHope</title>
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/detalhes.css">
+    <style>
+        .auth-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f0f0f0;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #4CAF50;
+            border-bottom: 3px solid #4CAF50;
+            margin-bottom: -2px;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #45a049;
+        }
+
+        .message {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            text-align: center;
+            display: none;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PetHope</h1>
+        <nav>
+            <a href="../index.html">Início</a>
+            <a href="../animais.html">Animais</a>
+            <a href="../adocao.html">Adoção</a>
+            <a href="../doacao-sangue.html">Doação de Sangue</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="mudarAba('login')">Login</button>
+                <button class="tab-btn" onclick="mudarAba('registro')">Registrar</button>
+            </div>
+
+            <!-- ABA LOGIN -->
+            <div id="login-tab" class="tab-content active">
+                <div id="login-message" class="message"></div>
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-email">E-mail:</label>
+                        <input type="email" id="login-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-senha">Senha:</label>
+                        <input type="password" id="login-senha" name="senha" required>
+                    </div>
+                    <button type="submit" class="btn">Entrar</button>
+                </form>
+            </div>
+
+            <!-- ABA REGISTRO -->
+            <div id="registro-tab" class="tab-content">
+                <div id="registro-message" class="message"></div>
+                <form id="registro-form" onsubmit="handleRegistro(event)">
+                    <div class="form-group">
+                        <label for="reg-nome">Nome:</label>
+                        <input type="text" id="reg-nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">E-mail:</label>
+                        <input type="email" id="reg-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-telefone">Telefone:</label>
+                        <input type="tel" id="reg-telefone" name="telefone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-tipo">Tipo de Conta:</label>
+                        <select id="reg-tipo" name="tipo" required>
+                            <option value="">Selecione...</option>
+                            <option value="tutor">Tutor (Adoção)</option>
+                            <option value="clinica">Clínica Veterinária</option>
+                            <option value="ong">ONG (Proteção Animal)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-senha">Senha:</label>
+                        <input type="password" id="reg-senha" name="senha" required>
+                    </div>
+                    <button type="submit" class="btn">Criar Conta</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 PetHope</p>
+    </footer>
+
+    <script src="../../js/api.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script>
+        function mudarAba(aba) {
+            // Esconder todos os conteúdos
+            document.getElementById('login-tab').classList.remove('active');
+            document.getElementById('registro-tab').classList.remove('active');
+
+            // Remover classe active dos botões
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            // Mostrar aba selecionada
+            document.getElementById(aba + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function mostrarMensagem(elemento, tipo, texto) {
+            const messageDiv = document.getElementById(elemento);
+            messageDiv.textContent = texto;
+            messageDiv.className = 'message ' + tipo + ' show';
+            setTimeout(() => messageDiv.classList.remove('show'), 5000);
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('login-email').value;
+            const senha = document.getElementById('login-senha').value;
+
+            try {
+                const response = await api.loginUsuario(email, senha);
+                auth.setToken(response.token);
+                auth.setUser(response.usuario);
+
+                mostrarMensagem('login-message', 'success', 'Login realizado com sucesso!');
+                
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 1500);
+            } catch (error) {
+                mostrarMensagem('login-message', 'error', error.message || 'Erro ao fazer login');
+            }
+        }
+
+        async function handleRegistro(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById('reg-nome').value;
+            const email = document.getElementById('reg-email').value;
+            const telefone = document.getElementById('reg-telefone').value;
+            const tipo = document.getElementById('reg-tipo').value;
+            const senha = document.getElementById('reg-senha').value;
+
+            try {
+                const response = await api.registrarUsuario(nome, email, senha, tipo);
+
+                // Auto-login após registro
+                auth.setToken(response.token);
+                auth.setUser(response.usuario);
+
+                mostrarMensagem('registro-message', 'success', 'Conta criada com sucesso! Redirecionando...');
+                
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 1500);
+            } catch (error) {
+                mostrarMensagem('registro-message', 'error', error.message || 'Erro ao criar conta');
+            }
+        }
+    </script>
+</body>
+</html>
