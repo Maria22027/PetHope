@@ -67,6 +67,9 @@
                 <button class="download-btn" onclick="downloadDesktopApp()">
                     <i class="fab fa-windows"></i> Baixar para Windows
                 </button>
+                <p style="font-size: 0.9em; color: #666; margin-top: 10px;">
+                    <i class="fas fa-info-circle"></i> O instalador (71 MB) será baixado via Google Drive. Extraia o arquivo .zip após o download.
+                </p>
             </div>
             <div class="app-card desktop-card">
                 <i class="fab fa-windows"></i>
@@ -104,13 +107,8 @@
         }
 
         function downloadDesktopApp() {
-            // Download direto do instalador Windows
-            const link = document.createElement('a');
-            link.href = '/downloads/PetHope-Setup.exe';
-            link.download = 'PetHope-Setup.exe';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            // Download via Google Drive (link direto de download)
+            window.open('https://drive.google.com/uc?export=download&id=1mFASgAhzHJq07Q12MfhyU0_Tvtp6wWyU', '_blank');
         }
     </script>
 </body>

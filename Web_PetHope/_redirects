@@ -1,2 +1,4 @@
 # Redirecionamentos do Netlify
-/*    /html/index.html   200
+# Excluir downloads dos redirects
+/downloads/*  /downloads/:splat  200
+/*    /html/:splat   200
