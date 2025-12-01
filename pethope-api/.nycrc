@@ -1,0 +1,21 @@
+{
+  "all": true,
+  "include": [
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "tests",
+    ".nyc_output",
+    "coverage",
+    "jest.setup.js"
+  ],
+  "reporter": [
+    "text",
+    "html",
+    "lcov"
+  ],
+  "temp-dir": "./.nyc_output",
+  "report-dir": "./coverage",
+  "per-file": true
+}

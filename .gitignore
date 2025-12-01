@@ -32,15 +32,10 @@ desktop.ini
 *.swo
 *~
 
-# Diretório da API (já tem repositório próprio)
-pethope-api/
-
 # Arquivos temporários
 *.tmp
 *.temp
 .cache/
-
-
 
 # Mobile 
 
@@ -90,5 +85,57 @@ app-example
 /ios
 /android
 
-# Web
+# API
+# Dependencies
+node_modules/
+package-lock.json
 
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Coverage and test reports
+coverage/
+.nyc_output/
+*.lcov
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS files
+Thumbs.db
+desktop.ini
+
+# Build and dist
+dist/
+build/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Database files (if using local DB)
+*.sqlite
+*.db
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
