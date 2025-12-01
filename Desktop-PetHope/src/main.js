@@ -3,7 +3,7 @@ const path = require('path');
 const axios = require('axios');
 
 // Configuração
-const API_BASE_URL = process.env.API_URL || 'http://localhost:3000';
+const API_BASE_URL = process.env.API_URL || 'https://pethope-aw8q.onrender.com';
 const API_TIMEOUT = 10000;
 
 let mainWindow;
