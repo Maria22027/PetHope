@@ -34,8 +34,6 @@
   - Instalador completo de ~71 MB
   - Suporte a Windows 10/11 (x64)
 
-> 💡 **Nota**: Para instruções completas de deploy e build, consulte [`deploy.md`](deploy.md)
-
 ---
 
 ## 📋 Sumário
