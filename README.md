@@ -50,7 +50,6 @@
 - [API Endpoints](#-api-endpoints)
 - [Testes](#-testes)
 - [Autores](#-autores)
-- [Licença](#-licença)
 
 ---
 
